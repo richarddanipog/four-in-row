@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Player from './players';
-import Board from './board';
+const Player = require('./players');
+const board  = require('./board');
+
 
 class Game extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Game extends Component {
         }
     }
     setBoard(inputRows, inputColumns){
-        
+        board.initBoard(inputRows, inputColumns);
     }
     setNumOfPlayers(numOfPlayers){
 
