@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Player from './players';
+import Board from './board';
 
 class Game extends Component {
     constructor(props) {
@@ -8,6 +10,15 @@ class Game extends Component {
             player2: null,
             currentPlayer: null,
         }
+    }
+    setBoard(inputRows, inputColumns){
+        
+    }
+    setNumOfPlayers(numOfPlayers){
+
+    }
+    playMove(){
+        
     }
     // togglePlayer = () => {
     //     this.setState({
