@@ -13,7 +13,7 @@ class Board {
         return this.state.matrixBoard
     }
 
-    makeAMove = (colorIndex,playerColor) =>{
+    move = (colorIndex,playerColor) =>{
         
     }
 
