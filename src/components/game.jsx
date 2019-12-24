@@ -19,6 +19,12 @@ class Game extends Component {
 
     }
     playMove(){
+        let colIndex = currentPlayer.move()
+        do{
+            colIndex = currentPlayer.move()                     // We ask currentPlayer to choose column. 
+        } while (!board.move(colIndex, currentPlayer.color))        // If the column is full choose another one.
+        
+        
         
     }
     // togglePlayer = () => {
