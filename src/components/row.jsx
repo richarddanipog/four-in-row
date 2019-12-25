@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import  Cell  from './cell';
 
 
 const Row = ({row,playMove}) => {
     return (
-        <tr>
+        <div className={'row'}>
             {row.map((cell, i) => <Cell key={i} value={cell} columnIndex={i} playMove={playMove}/>)}
-        </tr>
+        </div>
     );
 };
 export default Row ;
