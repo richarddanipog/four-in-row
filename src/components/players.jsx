@@ -1,13 +1,24 @@
 
 class Player{
-    constructor( color, name){
-
+    constructor(color, name, value){
         this.color = color;
         this.name = name;
-    }
-    move(){
-        
+        this.value = value;
     }
 }
 
-module.exports = Player;
+class PC extends Player{
+    constructor(colIndex){
+        super();
+        this.color = "blue";
+        this.name = "computer";
+        this.colIndex = colIndex;
+        this.value = 2
+    }
+    move(){
+        let randomColIndex = Math.floor((Math.random()*this.colIndex))
+        return randomColIndex
+    }
+}
+
+module.exports = {Player, PC};
