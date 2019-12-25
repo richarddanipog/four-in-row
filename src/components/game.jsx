@@ -24,7 +24,7 @@ class Game extends Component {
             player1: null,
             player2: null,
             currentPlayer: null,
-            matrix: []
+            matrix: [],
         }
         this.playMove = this.playMove.bind(this);
     }
@@ -76,16 +76,18 @@ class Game extends Component {
     playMove(colIndex = -1) {
 
 
+
         console.log('i played', colIndex);
         const { currentPlayer } = this.state;
+
         if (colIndex === -1) {
             colIndex = this.state.currentPlayer.move()
         }
 
+
         board.move(colIndex, currentPlayer.value);
         console.log("f", board.getMatrix())
             this.toggleCurrentPlayer()
-        
 
     }
     render() {
@@ -95,7 +97,9 @@ class Game extends Component {
                 <h1>Connect 4</h1>
                 <h2>ROW : {rowInput}</h2>
                 <h2>COL : {colInput}</h2>
-                {this.state.matix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
+
+                {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
+
             </div>
         );
     }
