@@ -1,6 +1,6 @@
 class Board {
     constructor() {
-            this.matrixBoard =[];
+        this.matrixBoard = [];
     }
     initBoard = (rowInput, colInput) => {
         for (let row = 0; row < rowInput; row++) {
@@ -13,8 +13,16 @@ class Board {
         return this.state.matrixBoard
     }
 
-    move = (colorIndex,playerColor) =>{
-        
+    move = (colorIndex, playerColor) => {
+        const board = this.state.matrixBoard
+        for (let row = board.length - 1; row >= 0; row--) {
+            if (!(board[row][colorIndex])) {
+                board[row][colorIndex] = playerColor;
+            } else {
+                return alert('You can\'t play this move, try somthing else.');
+            }
+        }
+        return board[row][colorIndex]
     }
 
     doWeHaveAWinner = () => {
@@ -22,4 +30,4 @@ class Board {
     }
 }
 
-module.exports =  new Board();
+module.exports = new Board();
