@@ -10,7 +10,7 @@ class Board {
         for (let row = 0; row < rowInput; row++) {
             let matrixRow = []
             for (let col = 0; col < colInput; col++) {
-                this.matrixBoard.push(null)
+                matrixRow.push(null)
             }
             this.matrixBoard.push(matrixRow);
         }

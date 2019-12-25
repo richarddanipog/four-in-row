@@ -24,16 +24,22 @@ class Game extends Component {
             player1: null,
             player2: null,
             currentPlayer: null,
+            matrix: []
         }
     }
-    
+
     componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
-    }
-    setBoard(inputRows, inputColumns) {
-        board.initBoard(inputRows, inputColumns);
-    }
+    };
+
+    setBoard = (inputRows, inputColumns) => {
+        const m = board.initBoard(inputRows, inputColumns);
+        this.setState({
+            matrix:m
+        })
+    };
+
     setNumOfPlayers = (numOfPlayers) => {
         if (numOfPlayers == 1) {
             this.setState({
@@ -46,41 +52,48 @@ class Game extends Component {
                 player2: new Player("blue", "player2", 2)
             })
         }
-    }
+    };
+
     toggleCurrentPlayer = () => {
-        if (this.currentPlayer.value == 1) {
-            this.setState({
-                currentPlayer: this.state.player2
-            })
-        } else {
+        if (!this.currentPlayer) {
             this.setState({
                 currentPlayer: this.state.player1
             })
-        }
+        } else
+            if (this.currentPlayer.value == 1) {
+                this.setState({
+                    currentPlayer: this.state.player2
+                })
+            } else {
+                this.setState({
+                    currentPlayer: this.state.player1
+                })
+            }
     }
+
     playMove(colIndex = -1) {
-        if (board.checkDraw) {
-            return 'draw'
-        }
+        const {currentPlayer} =this.state;
+
+        console.log('i played',colIndex)
         if (colIndex === -1) {
             colIndex = this.state.currentPlayer.move()
         }
-        board.move(colIndex, this.state.currentPlayer.value)
+        
+        board.move(colIndex, currentPlayer.value);
+        console.log("f",board.getMatrix())
         if (board.doWeHaveAWinner()) {
             this.toggleCurrentPlayer()
         }
+        
     }
     render() {
-
-       const matrix = board.getMatrix()
-
         return (
             <div className="App">
                 <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                 <h1>Connect 4</h1>
                 <h2>ROW : {rowInput}</h2>
                 <h2>COL : {colInput}</h2>
-                {matrix.map((row, i) => <Row key={i}row={row}/>)}
+                {this.state.matix === [] ? 'LOADING':this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove}/>)}
             </div>
         );
     }

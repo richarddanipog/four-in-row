@@ -42,3 +42,14 @@
   display: inline-block;
   padding: 20px;
 }
+.white{
+  background-color: white;
+}
+
+.red{
+  background-color: red;
+}
+
+.yellow{
+  background-color: yellow;
+}
