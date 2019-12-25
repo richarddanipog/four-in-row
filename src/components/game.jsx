@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cell from './cell';
 const Player = require('./players');
 const board = require('./board');
 
@@ -12,6 +13,7 @@ do {
 do {
   colInput = prompt('Choose colunm number :')
 } while (colInput < 4);
+
 
 class Game extends Component {
     constructor(props) {
@@ -28,15 +30,15 @@ class Game extends Component {
     setNumOfPlayers(numOfPlayers) {
 
     }
-    playMove() {
-        let colIndex = currentPlayer.move()
-        do {
-            colIndex = currentPlayer.move()                         // We ask currentPlayer to choose column. 
-        } while (!board.move(colIndex, currentPlayer.color))        // If the column is full choose another one.
+    // playMove() {
+    //     let colIndex = currentPlayer.move()
+    //     do {
+    //         colIndex = currentPlayer.move()                         // We ask currentPlayer to choose column. 
+    //     } while (!board.move(colIndex, currentPlayer.color))        // If the column is full choose another one.
 
 
 
-    }
+    // }
     // togglePlayer = () => {
     //     this.setState({
     //         currentPlayer:this.state.currentPlayer == 1 ? this.state.player2 : this.state.player1,
@@ -45,7 +47,7 @@ class Game extends Component {
 
     render() {
         const board = [];
-
+        this.setBoard(rowInput,colInput);
         for (let r = 0; r < rowInput; r++) {
           const row = [];
           for (let c = 0; c < colInput; c++) {
@@ -64,5 +66,6 @@ class Game extends Component {
         );
     }
 }
+
 
 export default Game;

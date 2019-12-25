@@ -1,7 +1,7 @@
 
 class Player{
-    constructor(props, color, name){
-        super(props);
+    constructor( color, name){
+
         this.color = color;
         this.name = name;
     }
