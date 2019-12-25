@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 const Player = require('./players');
-const board  = require('./board');
+const board = require('./board');
 
 let rowInput, colInput;
 
@@ -22,21 +22,27 @@ class Game extends Component {
             currentPlayer: null,
         }
     }
-    setBoard(inputRows, inputColumns){
+    setBoard(inputRows, inputColumns) {
         board.initBoard(inputRows, inputColumns);
     }
-    setNumOfPlayers(numOfPlayers){
+    setNumOfPlayers(numOfPlayers) {
 
     }
-    playMove(){
-        
+    playMove() {
+        let colIndex = currentPlayer.move()
+        do {
+            colIndex = currentPlayer.move()                         // We ask currentPlayer to choose column. 
+        } while (!board.move(colIndex, currentPlayer.color))        // If the column is full choose another one.
+
+
+
     }
     // togglePlayer = () => {
     //     this.setState({
     //         currentPlayer:this.state.currentPlayer == 1 ? this.state.player2 : this.state.player1,
     //     })
     // }
-    
+
     render() {
         const board = [];
 
