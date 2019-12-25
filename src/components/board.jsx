@@ -2,6 +2,10 @@ class Board {
     constructor() {
         this.matrixBoard = [];
     }
+    getMatrix = () => {
+        return this.state.matrixBoard
+    }
+    
     initBoard = (rowInput, colInput) => {
         for (let row = 0; row < rowInput; row++) {
             let matrixRow = []

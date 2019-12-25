@@ -26,6 +26,7 @@ class Game extends Component {
             currentPlayer: null,
         }
     }
+    
     componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
