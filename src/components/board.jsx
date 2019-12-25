@@ -14,14 +14,14 @@ class Board {
     }
 
 
-    move = (colorIndex, playerColor) => {
+    move = (colIndex, playerValue) => {
         const board = this.state.matrixBoard
         for (let row = board.length - 1; row >= 0; row--) {
-            if (!(board[row][colorIndex])) {
-                board[row][colorIndex] = playerColor;
-                return board[row][colorIndex]
+            if (!(board[row][colIndex])) {
+                board[row][colIndex] = playerValue;
+                return true
             } 
-        }
+        } return false
     }
 
     doWeHaveAWinner = (board, row, col) => {
