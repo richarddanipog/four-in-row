@@ -26,10 +26,10 @@ class Game extends Component {
             currentPlayer: null,
         }
     }
-    componentDidMount(){
+    
+    componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
-        
     }
     setBoard(inputRows, inputColumns) {
         board.initBoard(inputRows, inputColumns);
@@ -48,18 +48,7 @@ class Game extends Component {
         }
     }
     toggleCurrentPlayer = () => {
-        this.setState({
-            currentPlayer: this.state.player1
-        })
-    }
-    playMove(colIndex = -1) {
-        if (colIndex === -1) {
-            colIndex = this.state.currentPlayer.move()
-        }
-        board.move(colIndex, this.state.currentPlayer.value)
-
-
-        if(this.currentPlayer.value == 1){
+        if (this.currentPlayer.value == 1) {
             this.setState({
                 currentPlayer: this.state.player2
             })
@@ -69,18 +58,22 @@ class Game extends Component {
             })
         }
     }
-
-
-
-    // }
-    // togglePlayer = () => {
-    //     this.setState({
-    //         currentPlayer:this.state.currentPlayer == 1 ? this.state.player2 : this.state.player1,
-    //     })
-    // }
-
+    playMove(colIndex = -1) {
+        if (board.checkDraw) {
+            return 'draw'
+        }
+        if (colIndex === -1) {
+            colIndex = this.state.currentPlayer.move()
+        }
+        board.move(colIndex, this.state.currentPlayer.value)
+        if (board.doWeHaveAWinner()) {
+            this.toggleCurrentPlayer()
+        }
+    }
     render() {
+
        const matrix = board.getMatrix()
+
         return (
             <div className="App">
                 <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
