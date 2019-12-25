@@ -3,7 +3,7 @@ class Board {
         this.matrixBoard = [];
     }
     getMatrix = () => {
-        return this.state.matrixBoard
+        return this.matrixBoard
     }
     
     initBoard = (rowInput, colInput) => {
@@ -19,11 +19,12 @@ class Board {
 
 
     move = (colIndex, playerValue) => {
-        const board = this.state.matrixBoard
+        const board = this.matrixBoard
         for (let row = board.length - 1; row >= 0; row--) {
             if (!(board[row][colIndex])) {
                 board[row][colIndex] = playerValue;
-                return true
+                this.matrixBoard = board;
+                return this.matrixBoard
             }
         } return false
     }
