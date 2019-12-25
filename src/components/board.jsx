@@ -23,7 +23,7 @@ class Board {
         for (let row = board.length - 1; row >= 0; row--) {
             if (!(board[row][colIndex])) {
                 board[row][colIndex] = playerValue;
-                return true
+                return board[row][colIndex]
             }
         } return false
     }

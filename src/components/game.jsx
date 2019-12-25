@@ -26,6 +26,7 @@ class Game extends Component {
             currentPlayer: null,
             matrix: [],
         }
+        this.playMove = this.playMove.bind(this);
     }
 
     componentDidMount() {
@@ -55,33 +56,39 @@ class Game extends Component {
     };
 
     toggleCurrentPlayer = () => {
-        if (!this.currentPlayer) {
+        console.log("hi!")
+        if (!this.state.currentPlayer){
             this.setState({
                 currentPlayer: this.state.player1
-            })
-        } else
-            if (this.currentPlayer.value == 1) {
-                this.setState({
-                    currentPlayer: this.state.player2
-                })
-            } else {
-                this.setState({
-                    currentPlayer: this.state.player1
-                })
-            }
+            });
+        } else if (this.state.currentPlayer.value == 1) {
+            this.setState({
+                currentPlayer: this.state.player2
+            });
+            console.log("bla" , this.state.currentPlayer)
+        } else if (this.state.currentPlayer.value == 2){     
+            this.setState({
+                currentPlayer: this.state.player1
+            });
+        }
     }
 
     playMove(colIndex = -1) {
-        console.log('i played', colIndex)
+
+
+
+        console.log('i played', colIndex);
+        const { currentPlayer } = this.state;
+
         if (colIndex === -1) {
             colIndex = this.state.currentPlayer.move()
         }
 
-        board.move(colIndex, 1);
+
+        board.move(colIndex, currentPlayer.value);
         console.log("f", board.getMatrix())
-        if (board.doWeHaveAWinner()) {
             this.toggleCurrentPlayer()
-        }
+
     }
     render() {
         return (
@@ -90,7 +97,9 @@ class Game extends Component {
                 <h1>Connect 4</h1>
                 <h2>ROW : {rowInput}</h2>
                 <h2>COL : {colInput}</h2>
-                {this.state.matix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove}/>)}
+
+                {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
+
             </div>
         );
     }
