@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cell from './cell';
+import Row from './row';
 const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
@@ -80,24 +80,14 @@ class Game extends Component {
     // }
 
     render() {
-        const board = [];
-        console.log(this.state.player1)
-            console.log(this.state.player2)
-            console.log(this.state.currentPlayer)
-        for (let r = 0; r < rowInput; r++) {
-            const row = [];
-            for (let c = 0; c < colInput; c++) {
-                row.push(<Cell r={r} c={c} />)
-            }
-            board.push(<div>{row}</div>)
-        }
+       const matrix = board.getMatrix()
         return (
             <div className="App">
                 <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                 <h1>Connect 4</h1>
                 <h2>ROW : {rowInput}</h2>
                 <h2>COL : {colInput}</h2>
-                {board}
+                {matrix.map((row, i) => <Row key={i}row={row}/>)}
             </div>
         );
     }
