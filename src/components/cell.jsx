@@ -1,11 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Cell extends Component {
-    render() {
-        return (
-        <div className={'cell'}>{this.props.r},{this.props.c}</div>
-        );
+
+const Cell = ({ value, columnIndex, playMove }) => {
+    let color = 'white';
+    if (value === 1) {
+        color = 'red';
+    } else if (value === 2) {
+        color = 'yellow';
     }
-}
 
-export default Cell;
+    return (
+        <td>
+            <div className="cell" onClick={() => playMove(columnIndex)}>
+                <div className={color}></div>
+            </div>
+        </td>
+    );
+};
+
+
+export default Cell
