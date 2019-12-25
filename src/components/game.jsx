@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 const Player = require('./players');
 const board = require('./board');
 
+let rowInput, colInput;
+
+do {
+  rowInput = prompt('Choose row number :')
+} while (rowInput < 4);
+
+
+do {
+  colInput = prompt('Choose colunm number :')
+} while (colInput < 4);
 
 class Game extends Component {
     constructor(props) {
@@ -34,10 +44,23 @@ class Game extends Component {
     // }
 
     render() {
-        return (
-            <div>
+        const board = [];
 
-            </div>
+        for (let r = 0; r < rowInput; r++) {
+          const row = [];
+          for (let c = 0; c < colInput; c++) {
+            row.push(<Cell r={r} c={c}/>)
+          }
+          board.push(<div>{row}</div>)
+        }
+        return (
+          <div className="App">
+    
+            <h1>Connect 4</h1>
+            <h2>ROW : {rowInput}</h2>
+            <h2>COL : {colInput}</h2>
+            {board}
+          </div>
         );
     }
 }

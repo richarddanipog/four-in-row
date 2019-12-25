@@ -13,7 +13,17 @@ class Board {
         return this.state.matrixBoard
     }
 
-    make = (colorIndex, playerColor) => {
+
+    move = (colorIndex, playerColor) => {
+        const board = this.state.matrixBoard
+        for (let row = board.length - 1; row >= 0; row--) {
+            if (!(board[row][colorIndex])) {
+                board[row][colorIndex] = playerColor;
+            } else {
+                return alert('You can\'t play this move, try somthing else.');
+            }
+        }
+        return board[row][colorIndex]
 
     }
 
@@ -82,4 +92,6 @@ class Board {
     } 
 }
 
-module.exports = Board;
+
+module.exports = new Board();
+
