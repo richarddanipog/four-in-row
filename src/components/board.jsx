@@ -29,14 +29,19 @@ class Board {
     }
 
 
-    checkDraw = (board) => {
-        for (let r = 0; r < 6; r++) {
-            for (let c = 0; c < 7; c++) {
-                if (board[r][c] === null) {
-                    return false;
+    checkDraw = (board, row, col) => {
+        let counter = 0;
+
+        for (let r = 0; r < row; r++) {
+            for (let c = 0; c < col; c++) {
+                if (board[r][c] !== null) {
+                    counter++;
                 }
             }
-        } return 'draw';
+        } if (counter === row*col-1){
+            console.log(counter)
+            return true
+        } counter = 0 ; return false
     }
     checkVertical = (board, row, col) => {
         // Check only if row is 3 or greater
