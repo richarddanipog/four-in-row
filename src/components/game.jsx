@@ -7,13 +7,13 @@ const board = require('./board');
 let rowInput, colInput;
 
 do {
-    rowInput = prompt('Choose row number :')
-} while (rowInput < 4);
+    rowInput = parseInt(prompt('Choose row number :'));
+} while (rowInput < 4 || isNaN(rowInput));
 
 
 do {
-    colInput = prompt('Choose colunm number :')
-} while (colInput < 4);
+    colInput = parseInt(prompt('Choose colunm number :'));
+} while (colInput< 4 || isNaN(colInput));
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
 
@@ -72,6 +72,7 @@ class Game extends Component {
                 currentPlayer: this.state.player1
             });
         }
+        
     };
     playMove(colIndex = -1) {
 
@@ -101,17 +102,14 @@ class Game extends Component {
     };
 
     render() {
-
+        
         return (           
             <div className="App row m-0">
                 <div className={'col-6'}>
-
                     <h1>Welcome to Four In a Row</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
-                    <span>Row : {rowInput}</span>
-                    <span> Col : {colInput}</span>
                     {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
-                    {this.state.gameOver && <h1 className={'winner'}>{this.state.currentPlayer.name} WINS!</h1>}
+                    {this.state.gameOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
                 </div>
                 <div className={'col-6'}>
                     <div className={'board'}>
