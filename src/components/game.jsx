@@ -25,9 +25,7 @@ class Game extends Component {
             player2: null,
             currentPlayer: null,
             matrix: [],
-            gameOver: false,
-            draw: false
-
+            gameOver: false
         }
         this.playMove = this.playMove.bind(this);
     };
@@ -54,7 +52,7 @@ class Game extends Component {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new Player("blue", "player2", 2)
-            }, () => this.toggleCurrentPlayer())
+            })
         }
     };
 
@@ -81,21 +79,12 @@ class Game extends Component {
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
-            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
-                this.setState({
-                    draw: true
-                })
-                console.log(this.state.matrix)
-                console.log("DRAW!!");
-        
-            }
             board.move(colIndex, currentPlayer.value)
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.setState({
                     gameOver: true
                 })
-               
             } else {
                 this.toggleCurrentPlayer()
             }
@@ -106,8 +95,9 @@ class Game extends Component {
         return (
 
             <div className="App">
+
                 <div >
-                    <h1>Welcome to Connect Four Game!</h1>
+                    <h1>Welcome to Four In a Row</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                     <span>Row : {rowInput}</span>
                     <span> Col : {colInput}</span>
@@ -118,6 +108,7 @@ class Game extends Component {
                         {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                     </div>
                 </div>
+
             </div>
         );
     }
