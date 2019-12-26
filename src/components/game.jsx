@@ -74,10 +74,6 @@ class Game extends Component {
 
     playMove(colIndex = -1) {
 
-        // if(board.checkDraw){
-        //     console.log("DRAW!!");
-        //     return 
-        // }
         if (!this.state.gameOver) {
             const { currentPlayer } = this.state;
             if (colIndex === -1) {
@@ -96,10 +92,10 @@ class Game extends Component {
     };
 
     render() {
-        console.log("I WAS HERE")
-
         return (
-            <div >
+
+            <div className="App">
+
                 <div >
                     <h1>Welcome to Four In a Row</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
