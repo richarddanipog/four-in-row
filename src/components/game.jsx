@@ -12,8 +12,10 @@ do {
 
 
 do {
+
     colInput = parseInt(prompt('Choose colunm number :'));
 } while (colInput< 4 || isNaN(colInput));
+
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
 
@@ -81,7 +83,7 @@ class Game extends Component {
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
-            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
+            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.gameOver === false) {
                 this.setState({
                     draw: true
                 })
@@ -89,13 +91,16 @@ class Game extends Component {
                 console.log("DRAW!!");
         
             }
-            board.move(colIndex, currentPlayer.value)
+            let didMove = board.move(colIndex, currentPlayer.value);
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.setState({
                     gameOver: true
                 })
-            } else {
+            } else if (this.state.currentPlayer.name === "computer" && !didMove) {
+                this.playMove()
+            }  
+            else {
                 this.toggleCurrentPlayer()
             }
         }
