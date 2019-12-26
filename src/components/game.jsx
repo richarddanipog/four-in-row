@@ -72,20 +72,31 @@ class Game extends Component {
     };
 
     playMove(colIndex = -1) {
-        const { currentPlayer } = this.state;
 
-        if (colIndex === -1) {
-            colIndex = this.state.currentPlayer.move()
+        // if(board.checkDraw){
+        //     console.log("DRAW!!");
+        //     return 
+        // }
+        if (!this.state.gameOver){
+            {const { currentPlayer } = this.state;
+            if (colIndex === -1) {
+                colIndex = this.state.currentPlayer.move()
+            }
+            board.move(colIndex, currentPlayer.value)
+            console.log("Board ", board.getMatrix())
+            if(board.doWeHaveAWinner(this.state.matrix,rowInput, colInput )){
+                this.setState({
+                    gameOver: true
+                })
+            } else {
+                this.toggleCurrentPlayer() 
+            }}
         }
-        
-        
-        console.log("Board ", board.getMatrix())
-        this.toggleCurrentPlayer()
     };
 
+    render() { 
+        console.log("I WAS HERE")
 
-
-    render() {
         return (
             <div className="App">
                 <h1>Welcome to Four In a Row</h1>
