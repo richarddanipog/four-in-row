@@ -77,23 +77,22 @@ class Game extends Component {
         //     console.log("DRAW!!");
         //     return 
         // }
-        const { currentPlayer } = this.state;
-
-        if (colIndex === -1) {
-            colIndex = this.state.currentPlayer.move()
-        }
-        board.move(colIndex, currentPlayer.value)
-        console.log("Board ", board.getMatrix())
-        if(board.doWeHaveAWinner(this.state.matrix,rowInput, colInput )){
-            this.setState({
-                gameOver: true
-            })
-        } else {
-            this.toggleCurrentPlayer() 
+        if (!this.state.gameOver){
+            {const { currentPlayer } = this.state;
+            if (colIndex === -1) {
+                colIndex = this.state.currentPlayer.move()
+            }
+            board.move(colIndex, currentPlayer.value)
+            console.log("Board ", board.getMatrix())
+            if(board.doWeHaveAWinner(this.state.matrix,rowInput, colInput )){
+                this.setState({
+                    gameOver: true
+                })
+            } else {
+                this.toggleCurrentPlayer() 
+            }}
         }
     };
-
-
 
     render() { 
         console.log("I WAS HERE")
