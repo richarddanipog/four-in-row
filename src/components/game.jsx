@@ -100,18 +100,17 @@ class Game extends Component {
     };
 
     render() {
-        return (
-
-            <div className="App">
-
-                <div >
+        return (           
+            <div className="App row m-0">
+                <div className={'col-6'}>
                     <h1>Welcome to Four In a Row</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                     <span>Row : {rowInput}</span>
                     <span> Col : {colInput}</span>
+                    {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
                     {this.state.gameOver && <h1 className={'winner'}>{this.state.currentPlayer.name} WINS!</h1>}
                 </div>
-                <div >
+                <div className={'col-6'}>
                     <div className={'board'}>
                         {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                     </div>
