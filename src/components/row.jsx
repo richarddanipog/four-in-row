@@ -4,9 +4,9 @@ import  Cell  from './cell';
 
 const Row = ({row,playMove}) => {
     return (
-        <div className={'row'}>
+        <td className={'row'}>
             {row.map((cell, i) => <Cell key={i} value={cell} columnIndex={i} playMove={playMove}/>)}
-        </div>
+        </td>
     );
 };
-export default Row ;
+export default Row;
