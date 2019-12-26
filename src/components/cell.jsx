@@ -10,10 +10,10 @@ const Cell = ({ value, columnIndex, playMove}) => {
     }
 
     return (
-        <tr className={'cell-wrapper'}>
+        <div className={'cell-wrapper'}>
             <span className={`cell ${color}`} onClick={() => playMove(columnIndex)}>
             </span>
-        </tr>
+        </div>
     );
 };
 
