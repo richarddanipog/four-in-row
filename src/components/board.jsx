@@ -38,7 +38,7 @@ class Board {
                     counter++;
                 }
             }
-        } if (counter === row*col-1){
+        } if (counter === row*col){
             console.log(counter)
             return true
         } counter = 0;
