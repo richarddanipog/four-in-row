@@ -99,13 +99,13 @@ class Game extends Component {
         console.log("I WAS HERE")
         return (
             <div className="App">
+                <h1>Welcome to Four In a Row</h1>
                 <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                 <span>Row : {rowInput}</span>
                 <span> Col : {colInput}</span>
                 <span className={'board'}>
                     {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                 </span>
-
             </div>
         );
     }
