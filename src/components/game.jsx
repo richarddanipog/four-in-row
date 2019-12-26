@@ -97,9 +97,13 @@ class Game extends Component {
                 this.setState({
                     gameOver: true
                 })
-            } else if (this.state.currentPlayer.name === "computer" && !didMove) {
+            } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.gameOver) {
                 this.playMove()
-            }  
+            } else if(board.checkDraw(this.state.matrix, rowInput, colInput, 0)){
+                this.setState({
+                    draw: true
+                })
+            }
             else {
                 this.toggleCurrentPlayer()
             }
