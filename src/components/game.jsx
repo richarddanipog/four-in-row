@@ -52,7 +52,7 @@ class Game extends Component {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new Player("blue", "player2", 2)
-            })
+            }, () => this.toggleCurrentPlayer())
         }
     };
 
@@ -64,14 +64,15 @@ class Game extends Component {
         } else if (this.state.currentPlayer.value === 1) {
             this.setState({
                 currentPlayer: this.state.player2
-            });
+            }, () => {if (this.state.currentPlayer.name === "computer"){
+                setTimeout(this.playMove(), 2000)
+            }});
         } else if (this.state.currentPlayer.value === 2) {
             this.setState({
                 currentPlayer: this.state.player1
             });
         }
     };
-
     playMove(colIndex = -1) {
 
         if (!this.state.gameOver) {
@@ -100,9 +101,11 @@ class Game extends Component {
     };
 
     render() {
+
         return (           
             <div className="App row m-0">
                 <div className={'col-6'}>
+
                     <h1>Welcome to Four In a Row</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
                     <span>Row : {rowInput}</span>
