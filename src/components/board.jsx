@@ -41,7 +41,8 @@ class Board {
         } if (counter === row*col-1){
             console.log(counter)
             return true
-        } counter = 0 ; return false
+        } counter = 0;
+         return false
     }
     checkVertical = (board, row, col) => {
         // Check only if row is 3 or greater
