@@ -1,6 +1,9 @@
-html{
+body{
+  font-family: 'Shadows Into Light', cursive;
   background-color: #d5d5d5;
+  padding: 0 10px;
 }
+
 .cell{
   border: 1px solid;
   display: inline-block;
@@ -9,6 +12,7 @@ html{
   margin:5px;
   cursor: pointer;
 }
+
 .cell-wrapper{
   background-color: #3355ff;
   
@@ -18,10 +22,24 @@ html{
   display: flex;
   justify-content: center;
 }
+h2{
+  animation: moveRight 1s linear;
+}
+@keyframes moveRight{
+  0%{
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100%{
+    opacity: 1;
+    transform:translateX(0) ;
+  }
+}
+
+
 .white{
   background-color: white;
 }
-
 .red{
    background: rgb(202, 0, 0);
 }
@@ -31,7 +49,4 @@ html{
 }
 .board{
  text-align: center;
-}
-h2{
-  font-family: 'Shadows Into Light', cursive;
 }
