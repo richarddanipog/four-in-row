@@ -79,6 +79,14 @@ class Game extends Component {
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
+            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
+                this.setState({
+                    draw: true
+                })
+                console.log(this.state.matrix)
+                console.log("DRAW!!");
+        
+            }
             board.move(colIndex, currentPlayer.value)
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
