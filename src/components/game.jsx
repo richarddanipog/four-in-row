@@ -92,10 +92,6 @@ class Game extends Component {
             board.move(colIndex, currentPlayer.value)
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
-
-                 
-
-
                 this.setState({
                     gameOver: true
                 })
@@ -107,21 +103,9 @@ class Game extends Component {
     };
 
     render() {
-        console.log("I WAS HERE")
-
         return (
 
             <div className="App">
-                <h1>Welcome to Four In a Row</h1>
-                <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
-                <span>Row : {rowInput}</span>
-                <span> Col : {colInput}</span>
-                {this.state.gameOver && <h4>{this.state.currentPlayer.name}</h4>}
-                <span className={'board'}>
-                    {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
-                </span>
-
-            <div >
                 <div >
                     <h1>Welcome to Connect Four Game!</h1>
                     <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
@@ -134,8 +118,6 @@ class Game extends Component {
                         {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                     </div>
                 </div>
-
-
             </div>
         );
     }
