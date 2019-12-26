@@ -25,6 +25,7 @@ class Game extends Component {
             player2: null,
             currentPlayer: null,
             matrix: [],
+            gameOver: false
         }
         this.playMove = this.playMove.bind(this);
     };
@@ -72,19 +73,30 @@ class Game extends Component {
     };
 
     playMove(colIndex = -1) {
+        // if(board.checkDraw){
+        //     console.log("DRAW!!");
+        //     return 
+        // }
         const { currentPlayer } = this.state;
 
         if (colIndex === -1) {
             colIndex = this.state.currentPlayer.move()
         }
-        board.move(colIndex, currentPlayer.value);
+        board.move(colIndex, currentPlayer.value)
         console.log("Board ", board.getMatrix())
-        this.toggleCurrentPlayer()
+        if(board.doWeHaveAWinner(this.state.matrix,rowInput, colInput )){
+            this.setState({
+                gameOver: true
+            })
+        } else {
+            this.toggleCurrentPlayer() 
+        }
     };
 
 
 
-    render() {
+    render() { 
+        console.log("I WAS HERE")
         return (
             <div className="App">
                 <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
