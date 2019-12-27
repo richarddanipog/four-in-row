@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Modak|Rock+Salt&display=swap');
 body{
-  font-family: 'Shadows Into Light', cursive;
-  background-color: #d5d5d5;
+  background-image: url(https://store-images.s-microsoft.com/image/apps.41929.14246448385562777.7795b656-4cc6-43e1-897f-ecca74691263.ce6424bf-ec09-434a-9a0d-6d9507621cfa?mode=scale&q=90&h=1080&w=1920);
+  background-size: cover;
   padding: 20px;
 }
-
+h1{
+  font-family: 'Rock Salt', cursive;
+  font-size: 45px;
+}
 .cell{
   border: 1px solid;
   display: inline-block;
@@ -12,11 +16,25 @@ body{
   margin:5px;
   cursor: pointer;
 }
-
-
+.details{
+  background-color: rgba(0, 0, 0, .3);
+  height: 50vh;
+  border-radius: 10px;
+  padding: 15px;
+  color: whitesmoke;
+}
+.current-player{
+  font-family: 'Modak', cursive;
+  background-color: rgba(0, 0, 0, .3);
+  color:white;
+  font-size: 40px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0 10px;
+}
 .cell-wrapper{
   background-color: #3355ff;
-  
+  border: 1px solid black;
 }
 .row{
   display: flex;
