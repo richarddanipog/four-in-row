@@ -104,8 +104,8 @@ class Game extends Component {
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.setState({
                     roundOver: true
-                })
-                this.checkWinnerOfTournament()
+                }, () => this.checkWinnerOfTournament())
+                
             } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.roundOver) {
                 this.playMove()
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
@@ -128,9 +128,11 @@ class Game extends Component {
                 gameOver: true
             })
         } else {
+            setTimeout(() => this.setBoard(rowInput, colInput), 2000)
             this.setState({
-                matrix: []
-            }, () => this.setBoard(rowInput, colInput))
+                roundOver: false
+            })
+            
         }
     }
 
