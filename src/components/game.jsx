@@ -74,7 +74,7 @@ class Game extends Component {
                 currentPlayer: this.state.player2
             }, () => {
                 if (this.state.currentPlayer.name === "computer") {
-                    setTimeout(this.playMove(), 2000)
+                    this.playMove()
                 }
             });
         } else if (this.state.currentPlayer.value === 2) {
@@ -85,7 +85,6 @@ class Game extends Component {
 
     };
     playMove(colIndex = -1) {
-
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
             if (colIndex === -1) {
@@ -108,6 +107,7 @@ class Game extends Component {
                 this.setState({
                     roundOver: true
                 }, () => this.checkWinnerOfTournament())
+
                 
             } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.roundOver) {
                 this.playMove()
@@ -134,9 +134,13 @@ class Game extends Component {
             setTimeout(() => this.setBoard(rowInput, colInput), 2000)
             this.setState({
                 roundOver: false
+            }, () => {
+                console.log("roundOver", this.state.roundOver);
+                if(this.state.currentPlayer.name === "computer"){
+                    setTimeout(() => this.playMove(), 2500)
+                }
             })
-            
-        }
+        } 
     }
 
     render() {
