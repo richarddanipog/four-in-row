@@ -102,6 +102,9 @@ class Game extends Component {
             let didMove = board.move(colIndex, currentPlayer.value);
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
+                this.state.currentPlayer.wins++
+                console.log(this.state.player1.wins)
+                console.log(this.state.player2.wins)
                 this.setState({
                     roundOver: true
                 }, () => this.checkWinnerOfTournament())
@@ -137,7 +140,7 @@ class Game extends Component {
     }
 
     render() {
-        console.log(this.state.matrix)
+        
         return (
             <div className="App row m-0">
                 <div className={'col-6'}>
