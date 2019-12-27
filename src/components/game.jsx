@@ -4,7 +4,7 @@ const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
 
-let rowInput, colInput;
+let rowInput, colInput, bestOfHowManyGames;
 
 do {
     rowInput = parseInt(prompt('Choose row number :'));
@@ -12,9 +12,14 @@ do {
 
 
 do {
-
     colInput = parseInt(prompt('Choose colunm number :'));
 } while (colInput < 4 || isNaN(colInput));
+
+do {
+    bestOfHowManyGames = parseInt(prompt('Best of how many games? :'));
+} while (bestOfHowManyGames < 0 || isNaN(colInput) || bestOfHowManyGames % 2 === 0);
+
+const winsToAchieve = bestOfHowManyGames/2 + 0.5;
 
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
@@ -27,6 +32,7 @@ class Game extends Component {
             player2: null,
             currentPlayer: null,
             matrix: [],
+            roundOver: false,
             gameOver: false
         }
         this.playMove = this.playMove.bind(this);
@@ -80,12 +86,12 @@ class Game extends Component {
     };
     playMove(colIndex = -1) {
 
-        if (!this.state.gameOver) {
+        if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
-            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.gameOver === false) {
+            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.roundOver === false) {
                 this.setState({
                     draw: true
                 })
@@ -97,9 +103,10 @@ class Game extends Component {
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.setState({
-                    gameOver: true
+                    roundOver: true
                 })
-            } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.gameOver) {
+                this.checkWinnerOfTournament()
+            } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.roundOver) {
                 this.playMove()
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
@@ -111,16 +118,31 @@ class Game extends Component {
             }
         }
     };
+    checkWinnerOfTournament = () => {
+        if (this.state.player1.wins === winsToAchieve) {
+            this.setState({
+                gameOver: true
+            })
+        } else if (this.state.player2.wins === winsToAchieve){
+            this.setState({
+                gameOver: true
+            })
+        } else {
+            this.setState({
+                matrix: []
+            }, () => this.setBoard(rowInput, colInput))
+        }
+    }
 
     render() {
-
+        console.log(this.state.matrix)
         return (
             <div className="App row m-0">
                 <div className={'col-6'}>
                     <div className={'details'}>
                         <h1>Welcome to Connect Four</h1>
                         {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
-                        {this.state.gameOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
+                        {this.state.roundOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
                     </div>
                 </div>
                 <div className={'col-6'}>
