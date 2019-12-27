@@ -14,7 +14,7 @@ do {
 do {
 
     colInput = parseInt(prompt('Choose colunm number :'));
-} while (colInput< 4 || isNaN(colInput));
+} while (colInput < 4 || isNaN(colInput));
 
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
@@ -66,15 +66,17 @@ class Game extends Component {
         } else if (this.state.currentPlayer.value === 1) {
             this.setState({
                 currentPlayer: this.state.player2
-            }, () => {if (this.state.currentPlayer.name === "computer"){
-                setTimeout(this.playMove(), 2000)
-            }});
+            }, () => {
+                if (this.state.currentPlayer.name === "computer") {
+                    setTimeout(this.playMove(), 2000)
+                }
+            });
         } else if (this.state.currentPlayer.value === 2) {
             this.setState({
                 currentPlayer: this.state.player1
             });
         }
-        
+
     };
     playMove(colIndex = -1) {
 
@@ -89,7 +91,7 @@ class Game extends Component {
                 })
                 console.log(this.state.matrix)
                 console.log("DRAW!!");
-        
+
             }
             let didMove = board.move(colIndex, currentPlayer.value);
             console.log("Board ", board.getMatrix())
@@ -99,7 +101,7 @@ class Game extends Component {
                 })
             } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.gameOver) {
                 this.playMove()
-            } else if(board.checkDraw(this.state.matrix, rowInput, colInput, 0)){
+            } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
                 })
@@ -111,17 +113,19 @@ class Game extends Component {
     };
 
     render() {
-        
-        return (           
+
+        return (
             <div className="App row m-0">
                 <div className={'col-6'}>
-                    <h1>Welcome to Four In a Row</h1>
-                    <h2>Current Player: {this.state.currentPlayer === null ? 'loading' : this.state.currentPlayer.name}</h2>
-                    {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
-                    {this.state.gameOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
+                    <div className={'details'}>
+                        <h1>Welcome to Connect Four</h1>
+                        {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
+                        {this.state.gameOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
+                    </div>
                 </div>
                 <div className={'col-6'}>
                     <div className={'board'}>
+                        <h2 className={'current-player'}>Current Player: {this.state.currentPlayer && this.state.currentPlayer.name}</h2>
                         {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                     </div>
                 </div>
