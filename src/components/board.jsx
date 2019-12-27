@@ -7,6 +7,7 @@ class Board {
     }
     
     initBoard = (rowInput, colInput) => {
+        this.matrixBoard = [];
         for (let row = 0; row < rowInput; row++) {
             let matrixRow = []
             for (let col = 0; col < colInput; col++) {
