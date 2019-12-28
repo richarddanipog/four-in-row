@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Row from './row';
+import Winner from './winner';
 const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
@@ -19,7 +20,7 @@ do {
     bestOfHowManyGames = parseInt(prompt('Best of how many games? :'));
 } while (bestOfHowManyGames < 0 || isNaN(colInput) || bestOfHowManyGames % 2 === 0);
 
-const winsToAchieve = bestOfHowManyGames/2 + 0.5;
+const winsToAchieve = bestOfHowManyGames / 2 + 0.5;
 
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
@@ -102,13 +103,11 @@ class Game extends Component {
             console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.state.currentPlayer.wins++
-                console.log(this.state.player1.wins)
-                console.log(this.state.player2.wins)
                 this.setState({
                     roundOver: true
                 }, () => this.checkWinnerOfTournament())
 
-                
+
             } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.roundOver) {
                 this.playMove()
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
@@ -126,7 +125,7 @@ class Game extends Component {
             this.setState({
                 gameOver: true
             })
-        } else if (this.state.player2.wins === winsToAchieve){
+        } else if (this.state.player2.wins === winsToAchieve) {
             this.setState({
                 gameOver: true
             })
@@ -136,31 +135,37 @@ class Game extends Component {
                 roundOver: false
             }, () => {
                 console.log("roundOver", this.state.roundOver);
-                if(this.state.currentPlayer.name === "computer"){
+                if (this.state.currentPlayer.name === "computer") {
                     setTimeout(() => this.playMove(), 2500)
                 }
             })
-        } 
+        }
     }
 
     render() {
-        
+        const { player1, player2, currentPlayer, draw, roundOver, matrix } = this.state;
         return (
             <div className="App row m-0">
-                <div className={'col-6'}>
+                {roundOver && <Winner winner={currentPlayer.name} />}
+                <div className={'col-6 mt-4'}>
                     <div className={'details'}>
                         <h1>Welcome to Connect Four</h1>
-                        {this.state.draw && <h1 className={'winner'}>DRAW!</h1>}
-                        {this.state.roundOver && <h3 className={'winner'}>{this.state.currentPlayer.name} WINS!</h3>}
+                        {player1 && <p>Best of {bestOfHowManyGames} {player1.name} VS {player2.name} lets GO!<br />POINTS:</p>}
+                        {player1 && <label className={'player'}>{player1.name} : {player1.wins}</label>}
+                        {player2 && <label className={'ml-5 player'}>{player2.name} : {player2.wins}</label>}
+                        {draw && <h1 className={'winner'}>DRAW!</h1>}
                     </div>
                 </div>
-                <div className={'col-6'}>
+                <div className={'col-6 mt-4'}>
                     <div className={'board'}>
-                        <h2 className={'current-player'}>Current Player: {this.state.currentPlayer && this.state.currentPlayer.name}</h2>
-                        {this.state.matrix === [] ? 'LOADING' : this.state.matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
+                        <div>
+                            <h2 className={'current-player'}>Current Player: {currentPlayer && currentPlayer.name}</h2>
+                        </div>
+                        <div>
+                            {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
+                        </div>
                     </div>
                 </div>
-
             </div>
         );
     }
