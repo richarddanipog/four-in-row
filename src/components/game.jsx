@@ -9,12 +9,12 @@ let rowInput, colInput, bestOfHowManyGames;
 
 do {
     rowInput = parseInt(prompt('Choose row number :'));
-} while (rowInput < 4 || isNaN(rowInput));
+} while (rowInput < 4 || rowInput > 8 || isNaN(rowInput));
 
 
 do {
     colInput = parseInt(prompt('Choose colunm number :'));
-} while (colInput < 4 || isNaN(colInput));
+} while (colInput < 4 || colInput > 8 || isNaN(colInput));
 
 do {
     bestOfHowManyGames = parseInt(prompt('Best of how many games? :'));
@@ -92,7 +92,7 @@ class Game extends Component {
                 colIndex = this.state.currentPlayer.move()
             }
             if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.gameOver === false) {
-                
+
                 console.log(this.state.matrix)
                 console.log("DRAW!!");
             }
@@ -110,6 +110,7 @@ class Game extends Component {
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
+
                 },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
             } else if (didMove) {
                 this.toggleCurrentPlayer()
@@ -136,13 +137,12 @@ class Game extends Component {
                         setTimeout(() => this.playMove(), 2500)
                     }
                 })
-            }, 2000)
-            
+            }, 2000) 
         }
     }
 
     render() {
-        const { player1, player2, currentPlayer, draw, roundOver, matrix, gameOver } = this.state;
+        const { player1, player2, currentPlayer, draw, matrix, gameOver } = this.state;
         return (
             <div className="App row m-0">
                 {gameOver && <Winner winner={currentPlayer.name} />}
@@ -158,9 +158,9 @@ class Game extends Component {
                 <div className={'col-6 mt-4'}>
                     <div className={'board'}>
                         <div>
-                            <h2 className={'current-player'}>Current Player:<br/> {currentPlayer && currentPlayer.name}</h2>
+                            <h2 className={'current-player'}>Current Player:<br /> {currentPlayer && currentPlayer.name}</h2>
                         </div>
-                        <div >
+                        <div>
                             {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                         </div>
                     </div>
