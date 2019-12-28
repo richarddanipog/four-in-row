@@ -110,9 +110,9 @@ class Game extends Component {
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
-                }, () => setTimeout(() => { this.setBoard(rowInput, colInput); this.setState({ draw: false }) }, 2000))
-            }
-            else {
+
+                },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
+            } else if (didMove) {
                 this.toggleCurrentPlayer()
             }
         }
