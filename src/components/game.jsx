@@ -127,23 +127,26 @@ class Game extends Component {
                 gameOver: true
             })
         } else {
-            setTimeout(() => this.setBoard(rowInput, colInput), 2000)
-            this.setState({
-                roundOver: false
-            }, () => {
-                console.log("roundOver", this.state.roundOver);
-                if (this.state.currentPlayer.name === "computer") {
-                    setTimeout(() => this.playMove(), 2500)
-                }
-            })
+            setTimeout(() => {
+                this.setBoard(rowInput, colInput);
+                this.setState({
+                    roundOver: false
+                }, () => {
+                    console.log("roundOver", this.state.roundOver);
+                    if (this.state.currentPlayer.name === "computer") {
+                        setTimeout(() => this.playMove(), 2500)
+                    }
+                })
+            }, 2000)
+            
         }
     }
 
     render() {
-        const { player1, player2, currentPlayer, draw, roundOver, matrix } = this.state;
+        const { player1, player2, currentPlayer, draw, roundOver, matrix, gameOver } = this.state;
         return (
             <div className="App row m-0">
-                {roundOver && <Winner winner={currentPlayer.name} />}
+                {gameOver && <Winner winner={currentPlayer.name} />}
                 <div className={'col-6 mt-4'}>
                     <div className={'details'}>
                         <h1>Welcome to Connect Four</h1>
@@ -158,7 +161,7 @@ class Game extends Component {
                         <div>
                             <h2 className={'current-player'}>Current Player:<br/> {currentPlayer && currentPlayer.name}</h2>
                         </div>
-                        <div style={{border: '1px solid',width:'400px'}}>
+                        <div >
                             {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                         </div>
                     </div>
