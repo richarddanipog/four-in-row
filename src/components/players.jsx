@@ -6,6 +6,7 @@ class Player{
         this.value = value;
         this.wins = 0
     }
+    move(){}
 }
 
 class PC extends Player{
