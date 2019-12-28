@@ -9,7 +9,7 @@ class Winner extends Component {
                     <h1>{winner}<br /> WINS!</h1>
                 </div>
                 <div className={'mt-5'}>
-                    <button><a href="/">NEW GAME</a></button>
+                    <a href="/">NEW GAME</a>
                 </div>
             </div>
         );

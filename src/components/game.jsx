@@ -137,13 +137,12 @@ class Game extends Component {
                         setTimeout(() => this.playMove(), 2500)
                     }
                 })
-            }, 2000)
-            
+            }, 2000) 
         }
     }
 
     render() {
-        const { player1, player2, currentPlayer, draw, roundOver, matrix, gameOver } = this.state;
+        const { player1, player2, currentPlayer, draw, matrix, gameOver } = this.state;
         return (
             <div className="App row m-0">
                 {gameOver && <Winner winner={currentPlayer.name} />}
