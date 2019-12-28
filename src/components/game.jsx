@@ -91,13 +91,10 @@ class Game extends Component {
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
-            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.roundOver === false) {
-                this.setState({
-                    draw: true
-                })
+            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.gameOver === false) {
+                
                 console.log(this.state.matrix)
                 console.log("DRAW!!");
-
             }
             let didMove = board.move(colIndex, currentPlayer.value);
             console.log("Board ", board.getMatrix())
@@ -113,7 +110,7 @@ class Game extends Component {
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
-                })
+                },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
             }
             else {
                 this.toggleCurrentPlayer()
