@@ -156,9 +156,9 @@ class Game extends Component {
                 <div className={'col-6 mt-4'}>
                     <div className={'board'}>
                         <div>
-                            <h2 className={'current-player'}>Current Player: {currentPlayer && currentPlayer.name}</h2>
+                            <h2 className={'current-player'}>Current Player:<br/> {currentPlayer && currentPlayer.name}</h2>
                         </div>
-                        <div>
+                        <div style={{border: '1px solid',width:'400px'}}>
                             {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                         </div>
                     </div>

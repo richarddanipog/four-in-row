@@ -103,8 +103,8 @@ h1{
   }
 }
 .win{
-  border: 1px solid;
-  border-radius:5px;
+  border: 7px solid;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   padding:20px 100px;
   animation: shakeWinner 3s ease infinite;
   transform-origin: 50% 50%;
