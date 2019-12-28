@@ -111,8 +111,7 @@ class Game extends Component {
                 this.setState({
                     draw: true
                 },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
-            }
-            else {
+            } else if (didMove) {
                 this.toggleCurrentPlayer()
             }
         }
