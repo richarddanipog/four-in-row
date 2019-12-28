@@ -122,7 +122,7 @@ class Game extends Component {
                     roundOver: false
                 }, () => {
                     if (this.state.currentPlayer.name === "computer") {
-                        setTimeout(() => this.playMove(), 2500)
+                        setTimeout(() => this.playMove())
                     }
                 })
             }, 2000) 
