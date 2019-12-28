@@ -18,10 +18,9 @@ do {
 
 do {
     bestOfHowManyGames = parseInt(prompt('Best of how many games? :'));
-} while (bestOfHowManyGames < 0 || isNaN(colInput) || bestOfHowManyGames % 2 === 0);
+} while (bestOfHowManyGames < 0 || isNaN(bestOfHowManyGames) || bestOfHowManyGames % 2 === 0);
 
 const winsToAchieve = bestOfHowManyGames / 2 + 0.5;
-
 
 let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
 
@@ -83,7 +82,6 @@ class Game extends Component {
                 currentPlayer: this.state.player1
             });
         }
-
     };
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
@@ -91,26 +89,17 @@ class Game extends Component {
             if (colIndex === -1) {
                 colIndex = this.state.currentPlayer.move()
             }
-            if (board.checkDraw(this.state.matrix, rowInput, colInput, 0) && this.state.gameOver === false) {
-
-                console.log(this.state.matrix)
-                console.log("DRAW!!");
-            }
             let didMove = board.move(colIndex, currentPlayer.value);
-            console.log("Board ", board.getMatrix())
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.state.currentPlayer.wins++
                 this.setState({
                     roundOver: true
                 }, () => this.checkWinnerOfTournament())
-
-
             } else if (this.state.currentPlayer.name === "computer" && !didMove && !this.state.roundOver) {
                 this.playMove()
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
-
                 },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
             } else if (didMove) {
                 this.toggleCurrentPlayer()
@@ -132,7 +121,6 @@ class Game extends Component {
                 this.setState({
                     roundOver: false
                 }, () => {
-                    console.log("roundOver", this.state.roundOver);
                     if (this.state.currentPlayer.name === "computer") {
                         setTimeout(() => this.playMove(), 2500)
                     }
@@ -157,7 +145,7 @@ class Game extends Component {
                 </div>
                 <div className={'col-6 mt-4'}>
                     <div className={'board'}>
-                        <div>
+                        <div style={{width:'400px'}}>
                             <h2 className={'current-player'}>Current Player:<br /> {currentPlayer && currentPlayer.name}</h2>
                         </div>
                         <div>
@@ -169,6 +157,5 @@ class Game extends Component {
         );
     }
 }
-
 
 export default Game;
