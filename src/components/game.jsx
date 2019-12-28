@@ -127,23 +127,26 @@ class Game extends Component {
                 gameOver: true
             })
         } else {
-            setTimeout(() => this.setBoard(rowInput, colInput), 2000)
-            this.setState({
-                roundOver: false
-            }, () => {
-                console.log("roundOver", this.state.roundOver);
-                if (this.state.currentPlayer.name === "computer") {
-                    setTimeout(() => this.playMove(), 2500)
-                }
-            })
+            setTimeout(() => {
+                this.setBoard(rowInput, colInput);
+                this.setState({
+                    roundOver: false
+                }, () => {
+                    console.log("roundOver", this.state.roundOver);
+                    if (this.state.currentPlayer.name === "computer") {
+                        setTimeout(() => this.playMove(), 2500)
+                    }
+                })
+            }, 2000)
+            
         }
     }
 
     render() {
-        const { player1, player2, currentPlayer, draw, roundOver, matrix } = this.state;
+        const { player1, player2, currentPlayer, draw, roundOver, matrix, gameOver } = this.state;
         return (
             <div className="App row m-0">
-                {roundOver && <Winner winner={currentPlayer.name} />}
+                {gameOver && <Winner winner={currentPlayer.name} />}
                 <div className={'col-6 mt-4'}>
                     <div className={'details'}>
                         <h1>Welcome to Connect Four</h1>
