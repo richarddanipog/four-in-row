@@ -1,0 +1,40 @@
+.game-mode{
+    height: 100%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center; 
+    flex-direction: column;
+}
+
+.choose-player{
+    width: 100%;
+}
+
+.choose-player > div{
+    margin-bottom:100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.choose-player  label:focus{
+    background-color:#fff;
+}
+
+
+.radio-toolbar input[type="radio"] {
+    display: none;
+  }
+  
+  .radio-toolbar label {
+    border:8px solid orange;
+    color: white;
+    font-size: 2rem;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding:2vw 4vw;
+    margin:0;
+    cursor: pointer;
+  }
+  
+  .radio-toolbar input[type="radio"]:checked+label {
+    background-color: black;
+  }

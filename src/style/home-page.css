@@ -1,0 +1,31 @@
+.home-page{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.start{
+    right: 150px;
+    bottom: 50px;
+}
+
+.start{
+    font-size:20px;
+    background-color: transparent;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border:solid 5px #fff;
+    box-shadow: 3px 3px 3px black;
+}
+
+
+
+h1{
+    font-family: 'Rock Salt', cursive;
+    font-size: 5vw;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 5px 5px black;
+  }

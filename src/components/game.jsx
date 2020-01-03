@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Row from './row';
 import Winner from './winner';
+
 const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
@@ -83,6 +84,7 @@ class Game extends Component {
             });
         }
     };
+
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
@@ -106,6 +108,7 @@ class Game extends Component {
             }
         }
     };
+
     checkWinnerOfTournament = () => {
         if (this.state.player1.wins === winsToAchieve) {
             this.setState({
@@ -134,21 +137,20 @@ class Game extends Component {
         return (
             <div className="App row m-0">
                 {gameOver && <Winner winner={currentPlayer.name} />}
-                <div className={'col-6 mt-4'}>
+                <div className={'col-12 col-lg-6 mt-4'}>
                     <div className={'details'}>
-                        <h1>Welcome to Connect Four</h1>
                         {player1 && <p>Best of {bestOfHowManyGames} {player1.name} VS {player2.name} lets GO!<br />POINTS:</p>}
                         {player1 && <label className={'player'}>{player1.name} : {player1.wins}</label>}
                         {player2 && <label className={'ml-5 player'}>{player2.name} : {player2.wins}</label>}
                         {draw && <h1 className={'winner'}>DRAW!</h1>}
                     </div>
                 </div>
-                <div className={'col-6 mt-4'}>
-                    <div className={'board'}>
-                        <div style={{width:'400px'}}>
-                            <h2 className={'current-player'}>Current Player:<br /> {currentPlayer && currentPlayer.name}</h2>
-                        </div>
+                <div className={'col-12 col-lg-6 mt-4'}>
+                    <div>
                         <div>
+                            <h2 className={'current-player'}>Current Player: {currentPlayer && currentPlayer.name}</h2>
+                        </div>
+                        <div className={'board'}>
                             {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                         </div>
                     </div>
