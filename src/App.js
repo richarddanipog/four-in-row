@@ -16,8 +16,8 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/game" component={Game} />
           <Route path="/game-mode" component={GameMode} />
+          <Route path="/game" component={Game} />
           <Route path="/" component={HomePage} />
         </Switch>
       </div>

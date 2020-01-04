@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import Row from './row';
 import Winner from './winner';
 
+
 const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
-
-let rowInput, colInput, bestOfHowManyGames;
-
-do {
-    rowInput = parseInt(prompt('Choose row number :'));
-} while (rowInput < 4 || rowInput > 8 || isNaN(rowInput));
+const gameMode = require('./game-mode')
 
 
-do {
-    colInput = parseInt(prompt('Choose colunm number :'));
-} while (colInput < 4 || colInput > 8 || isNaN(colInput));
+let rowInput, colInput, bestOfHowManyGames, numOfPlayers;
+const winsToAchieve = 3;
+export const getPlayers =  (numOfPlayers) => {
+    numOfPlayers = numOfPlayers
+    console.log(numOfPlayers)
+    return numOfPlayers
+}
+export const getColsAndRows = (cols, rows) => {
+    colInput = cols;
+    rowInput = rows;
+    console.log(colInput, rowInput)
+    return colInput, rowInput
+}
 
-do {
-    bestOfHowManyGames = parseInt(prompt('Best of how many games? :'));
-} while (bestOfHowManyGames < 0 || isNaN(bestOfHowManyGames) || bestOfHowManyGames % 2 === 0);
 
-const winsToAchieve = bestOfHowManyGames / 2 + 0.5;
-
-let numOfPlayers = parseInt(prompt('Enter 1 if you want to play versus pc, else enter 2 :'))
 
 class Game extends Component {
     constructor(props) {
@@ -38,12 +38,13 @@ class Game extends Component {
         }
         this.playMove = this.playMove.bind(this);
     };
-
+    
+    
     componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
     };
-
+    
     setBoard = (inputRows, inputColumns) => {
         const m = board.initBoard(inputRows, inputColumns);
         this.setState({
@@ -161,3 +162,4 @@ class Game extends Component {
 }
 
 export default Game;
+

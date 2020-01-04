@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import '../style/choose-mode.css';
 import {Link} from 'react-router-dom';
+import {getPlayers, getColsAndRows} from './game'
+const Game = require('./game');
 
 class GameMode extends Component {   
+    
     render() {
-        console.log(this.props)
+        console.log(this.props);
         return (
             <div className={'game-mode'}>
                 <div>
@@ -13,20 +16,20 @@ class GameMode extends Component {
                 <form className={'choose-player radio-toolbar'}>
                     <div>
                     <input type="radio" id="radio-players" name="player" value="all" />
-                        <label for="radio-players">1 VS. 1</label>
+                        <label onClick={() => getPlayers(2)} for="radio-players">1 VS. 1</label>
 
                         <input type="radio" id="radio-single" name="player" value="false" />
-                        <label for="radio-single">1 VS. COMPUTER</label>
+                        <label onClick={() => getPlayers(1)} for="radio-single">1 VS. COMPUTER</label>
                     </div>
                     <div class="radio-toolbar">
                         <input type="radio" id="radio1" name="board" value="all" />
-                        <label for="radio1">7 cols × 6 rows</label>
+                        <label onClick={() => getColsAndRows(7, 6)} for="radio1">7 cols × 6 rows</label>
 
                         <input type="radio" id="radio2" name="board" value="false" />
-                        <label for="radio2">5 cols × 4 rows</label>
+                        <label onClick={() => getColsAndRows(5, 4)} for="radio2">5 cols × 4 rows</label>
 
                         <input type="radio" id="radio3" name="board" value="true" />
-                        <label for="radio3">8 cols × 7 rows</label>
+                        <label onClick={() => getColsAndRows(8, 7)} for="radio3">8 cols × 7 rows</label>
                     </div>
                 </form>
                 <Link to={'/game'} className={'start position-absolute'} >
