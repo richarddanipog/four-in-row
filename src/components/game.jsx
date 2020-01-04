@@ -9,10 +9,9 @@ const board = require('./board');
 const gameMode = require('./game-mode')
 
 
-let rowInput, colInput, bestOfHowManyGames, numOfPlayers;
-const winsToAchieve = 3;
-export const getPlayers =  (numOfPlayers) => {
-    numOfPlayers = numOfPlayers
+let rowInput, colInput, bestOfHowManyGames, numOfPlayers,winsToAchieve;
+export const getPlayers =  (numOfPlayers1) => {
+    numOfPlayers = numOfPlayers1
     console.log(numOfPlayers)
     return numOfPlayers
 }
@@ -22,7 +21,11 @@ export const getColsAndRows = (cols, rows) => {
     console.log(colInput, rowInput)
     return colInput, rowInput
 }
-
+export const getBestOfHowManyGames =  (numberOfHowManyGames) => {
+    bestOfHowManyGames = numberOfHowManyGames
+    winsToAchieve = bestOfHowManyGames/2 + 0.5;
+    return bestOfHowManyGames, winsToAchieve
+}
 
 
 class Game extends Component {
@@ -57,12 +60,12 @@ class Game extends Component {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new PC(colInput)
-            }, () => this.toggleCurrentPlayer())
-        } else {
+            }, () => {this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name)})
+        } else if (numOfPlayers === 2) {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new Player("blue", "player2", 2)
-            }, () => this.toggleCurrentPlayer())
+            }, () => {this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name)})
         }
     };
 
@@ -83,7 +86,7 @@ class Game extends Component {
             this.setState({
                 currentPlayer: this.state.player1
             });
-        }
+        } 
     };
 
     playMove(colIndex = -1) {
