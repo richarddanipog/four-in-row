@@ -1,25 +1,18 @@
 .game-mode{
     height: 100%;
     display:flex;
-    justify-content:space-around;
     align-items:center; 
     flex-direction: column;
 }
 
 .choose-player{
     width: 100%;
-}
-
-.choose-player > div{
-    margin-bottom:100px;
-    display: flex;
-    justify-content: space-around;
+    text-align: center;
 }
 
 .choose-player  label:focus{
     background-color:#fff;
 }
-
 
 .radio-toolbar input[type="radio"] {
     display: none;
@@ -33,6 +26,7 @@
     padding:2vw 4vw;
     margin:0;
     cursor: pointer;
+    margin:2vh 2vw;
   }
   
   .radio-toolbar input[type="radio"]:checked+label {
