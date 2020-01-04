@@ -48,7 +48,13 @@ class Game extends Component {
             board.moveBack(this.state.lastMoveOfPlayer1);
         } else if (this.state.currentPlayer.name == "player2" && numOfPlayers == 2){
             board.moveBack(this.state.lastMoveOfPlayer2);
-
+        } else if (this.state.currentPlayer.name == "player1" && numOfPlayers == 1){
+            board.moveBack(this.state.lastMoveOfPlayer2);
+            board.moveBack(this.state.lastMoveOfPlayer1);
+            const m = board.getMatrix();
+            this.setState({
+                matrix: m
+            })
         }
         
     }
@@ -102,12 +108,12 @@ class Game extends Component {
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
-            if (currentPlayer.name = "player1"){
+            if (currentPlayer.name == "player1"){
                 this.setState({
                     lastMoveOfPlayer1: colIndex
                 })
             }
-            if (currentPlayer.name = "player2"){
+            if (currentPlayer.name == "player2"){
                 this.setState({
                     lastMoveOfPlayer2: colIndex
                 })
