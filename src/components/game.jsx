@@ -46,8 +46,16 @@ class Game extends Component {
     moveBack = () => {
         if (this.state.currentPlayer.name == "player1" && numOfPlayers == 2 ){
             board.moveBack(this.state.lastMoveOfPlayer1);
+            const m = board.getMatrix();
+            this.setState({
+                matrix: m
+            })
         } else if (this.state.currentPlayer.name == "player2" && numOfPlayers == 2){
             board.moveBack(this.state.lastMoveOfPlayer2);
+            const m = board.getMatrix();
+            this.setState({
+                matrix: m
+            })
         } else if (this.state.currentPlayer.name == "player1" && numOfPlayers == 1){
             board.moveBack(this.state.lastMoveOfPlayer2);
             board.moveBack(this.state.lastMoveOfPlayer1);
