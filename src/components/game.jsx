@@ -37,12 +37,22 @@ class Game extends Component {
             currentPlayer: null,
             matrix: [],
             roundOver: false,
-            gameOver: false
+            gameOver: false,
+            lastMoveOfPlayer1: null,
+            lastMoveOfPlayer2: null
         }
         this.playMove = this.playMove.bind(this);
     };
     
-    
+    moveBack = () => {
+        if (this.state.currentPlayer.name == "player1" && numOfPlayers == 2 ){
+            board.moveBack(this.state.lastMoveOfPlayer1);
+        } else if (this.state.currentPlayer.name == "player2" && numOfPlayers == 2){
+            board.moveBack(this.state.lastMoveOfPlayer2);
+
+        }
+        
+    }
     componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
@@ -92,9 +102,24 @@ class Game extends Component {
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
-            if (colIndex === -1) {
-                colIndex = this.state.currentPlayer.move()
+            if (currentPlayer.name = "player1"){
+                this.setState({
+                    lastMoveOfPlayer1: colIndex
+                })
             }
+            if (currentPlayer.name = "player2"){
+                this.setState({
+                    lastMoveOfPlayer2: colIndex
+                })
+            }
+            if (colIndex === -1) {
+                colIndex = currentPlayer.move(); 
+                
+                    this.setState({
+                        lastMoveOfPlayer2: colIndex
+                    })
+                }
+            
             let didMove = board.move(colIndex, currentPlayer.value);
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.state.currentPlayer.wins++
@@ -158,6 +183,9 @@ class Game extends Component {
                             {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                         </div>
                     </div>
+                </div>
+                <div >
+                    <button onClick={() => this.moveBack()}>move back</button>
                 </div>
             </div>
         );
