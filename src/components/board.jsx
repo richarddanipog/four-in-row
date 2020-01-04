@@ -18,7 +18,6 @@ class Board {
         return this.matrixBoard
     }
 
-
     move = (colIndex, playerValue) => {
         const board = this.matrixBoard
         for (let row = board.length - 1; row >= 0; row--) {
@@ -29,7 +28,16 @@ class Board {
         } return false
     }
 
-
+    moveBack = (colIndex) => {
+        const board = this.matrixBoard
+        for (let row = 0; row < board.length; row++) {
+            if ((board[row][colIndex])) {
+                board[row][colIndex] = 0;
+                console.log(this.board)
+                return board[row][colIndex]
+            }
+    }}
+    
     checkDraw = (board, row, col) => {
         let counter = 0;
 
