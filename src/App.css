@@ -177,3 +177,8 @@ a:hover{
     margin: 10px auto;
   }
 }
+.move-back button{
+  border: none;
+  padding:20px;
+  background-color:transparent;
+}
