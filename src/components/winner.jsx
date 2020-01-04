@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import{Link} from 'react-router-dom';
 
 class Winner extends Component {
     render() {
@@ -9,7 +10,7 @@ class Winner extends Component {
                     <h1>{winner}<br /> WINS!</h1>
                 </div>
                 <div className={'mt-5'}>
-                    <a href="/">NEW GAME</a>
+                    <Link to="/game-mode">NEW GAME</Link>
                 </div>
             </div>
         );
