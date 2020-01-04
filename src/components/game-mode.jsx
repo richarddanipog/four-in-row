@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../style/choose-mode.css';
 import {Link} from 'react-router-dom';
-import {getPlayers, getColsAndRows} from './game'
+import {getPlayers, getColsAndRows, getBestOfHowManyGames} from './game'
 const Game = require('./game');
 
 class GameMode extends Component {   
@@ -33,13 +33,13 @@ class GameMode extends Component {
                     </div>
                     <div class="radio-toolbar">
                         <input type="radio" id="game1" name="numOfGames" value="all" />
-                        <label for="game1">Single Game</label>
+                        <label onClick={() => getBestOfHowManyGames(1)} for="game1">Single Game</label>
 
                         <input type="radio" id="game2" name="numOfGames" value="false" />
-                        <label for="game2">Best of 3</label>
+                        <label onClick={() => getBestOfHowManyGames(3)} for="game2">Best of 3</label>
 
                         <input type="radio" id="game3" name="numOfGames" value="true" />
-                        <label for="game3">Best of 5</label>
+                        <label onClick={() => getBestOfHowManyGames(5)} for="game3">Best of 5</label>
                     </div>
                 </form>
                 <Link to={'/game'} className={'start position-absolute'} >
