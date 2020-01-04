@@ -188,13 +188,13 @@ class Game extends Component {
                     <h4>Best Of {bestOfHowManyGames}</h4>
                     <hr />
                     <div className={'current-player'}>Current Player : {currentPlayer && currentPlayer.name}</div>
+                    <div className={'move-back'}>
+                    <button onClick={() => this.moveBack()}>move back</button>
+                </div>
                     {draw && <h1 className={'winner'}>DRAW!</h1>}
                 </div>
                 <div className={'board'}>
                     {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
-                </div>
-                <div >
-                    <button onClick={() => this.moveBack()}>move back</button>
                 </div>
             </div>
         );
