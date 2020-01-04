@@ -102,12 +102,12 @@ class Game extends Component {
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
-            if (currentPlayer.name = "player1"){
+            if (currentPlayer.name == "player1"){
                 this.setState({
                     lastMoveOfPlayer1: colIndex
                 })
             }
-            if (currentPlayer.name = "player2"){
+            if (currentPlayer.name == "player2"){
                 this.setState({
                     lastMoveOfPlayer2: colIndex
                 })
@@ -121,6 +121,7 @@ class Game extends Component {
                 }
             
             let didMove = board.move(colIndex, currentPlayer.value);
+            console.log(didMove)
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
                 this.state.currentPlayer.wins++
                 this.setState({
