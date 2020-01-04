@@ -11,7 +11,7 @@ const gameMode = require('./game-mode')
 
 let rowInput, colInput, bestOfHowManyGames, numOfPlayers;
 const winsToAchieve = 3;
-export const getPlayers =   (numOfPlayers) => {
+export const getPlayers =  (numOfPlayers) => {
     numOfPlayers = numOfPlayers
     console.log(numOfPlayers)
     return numOfPlayers
