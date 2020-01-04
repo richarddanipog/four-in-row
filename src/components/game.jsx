@@ -6,24 +6,22 @@ import Winner from './winner';
 const Player = require('./players').Player;
 const PC = require('./players').PC;
 const board = require('./board');
-const gameMode = require('./game-mode')
 
 
-let rowInput, colInput, bestOfHowManyGames, numOfPlayers,winsToAchieve;
-export const getPlayers =  (numOfPlayers1) => {
+
+let rowInput, colInput, bestOfHowManyGames, numOfPlayers, winsToAchieve;
+export const getPlayers = (numOfPlayers1) => {
     numOfPlayers = numOfPlayers1
-    console.log(numOfPlayers)
     return numOfPlayers
 }
 export const getColsAndRows = (cols, rows) => {
     colInput = cols;
     rowInput = rows;
-    console.log(colInput, rowInput)
     return colInput, rowInput
 }
-export const getBestOfHowManyGames =  (numberOfHowManyGames) => {
+export const getBestOfHowManyGames = (numberOfHowManyGames) => {
     bestOfHowManyGames = numberOfHowManyGames
-    winsToAchieve = bestOfHowManyGames/2 + 0.5;
+    winsToAchieve = bestOfHowManyGames / 2 + 0.5;
     return bestOfHowManyGames, winsToAchieve
 }
 
@@ -41,13 +39,13 @@ class Game extends Component {
         }
         this.playMove = this.playMove.bind(this);
     };
-    
-    
+
+
     componentDidMount() {
         this.setBoard(rowInput, colInput);
         this.setNumOfPlayers(numOfPlayers);
     };
-    
+
     setBoard = (inputRows, inputColumns) => {
         const m = board.initBoard(inputRows, inputColumns);
         this.setState({
@@ -60,12 +58,12 @@ class Game extends Component {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new PC(colInput)
-            }, () => {this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name)})
+            }, () => { this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name) })
         } else if (numOfPlayers === 2) {
             this.setState({
                 player1: new Player("red", "player1", 1),
                 player2: new Player("blue", "player2", 2)
-            }, () => {this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name)})
+            }, () => { this.toggleCurrentPlayer(); console.log(this.state.player1.name, this.state.player2.name) })
         }
     };
 
@@ -86,7 +84,7 @@ class Game extends Component {
             this.setState({
                 currentPlayer: this.state.player1
             });
-        } 
+        }
     };
 
     playMove(colIndex = -1) {
@@ -106,7 +104,7 @@ class Game extends Component {
             } else if (board.checkDraw(this.state.matrix, rowInput, colInput, 0)) {
                 this.setState({
                     draw: true
-                },() => setTimeout(() => {this.setBoard(rowInput, colInput); this.setState({draw: false})}, 2000))
+                }, () => setTimeout(() => { this.setBoard(rowInput, colInput); this.setState({ draw: false }) }, 2000))
             } else if (didMove) {
                 this.toggleCurrentPlayer()
             }
@@ -132,32 +130,26 @@ class Game extends Component {
                         setTimeout(() => this.playMove())
                     }
                 })
-            }, 2000) 
+            }, 2000)
         }
     }
 
     render() {
         const { player1, player2, currentPlayer, draw, matrix, gameOver } = this.state;
         return (
-            <div className="App row m-0">
+            <div className="row m-0 text-center">
                 {gameOver && <Winner winner={currentPlayer.name} />}
-                <div className={'col-12 col-lg-6 mt-4'}>
-                    <div className={'details'}>
-                        {player1 && <p>Best of {bestOfHowManyGames} {player1.name} VS {player2.name} lets GO!<br />POINTS:</p>}
-                        {player1 && <label className={'player'}>{player1.name} : {player1.wins}</label>}
-                        {player2 && <label className={'ml-5 player'}>{player2.name} : {player2.wins}</label>}
-                        {draw && <h1 className={'winner'}>DRAW!</h1>}
-                    </div>
+                <div className={'details'}>
+                    <h1 style={{ color: 'orange' }}>LET'S PLAY!</h1>
+                    {player1 && <label className={'player'}>{player1.name} : {player1.wins}</label>}
+                    {player2 && <label className={'player'}>{player2.name} : {player2.wins}</label>}
+                    <h4>Best Of {bestOfHowManyGames}</h4>
+                    <hr />
+                    <div className={'current-player'}>Current Player : {currentPlayer && currentPlayer.name}</div>
+                    {draw && <h1 className={'winner'}>DRAW!</h1>}
                 </div>
-                <div className={'col-12 col-lg-6 mt-4'}>
-                    <div>
-                        <div>
-                            <h2 className={'current-player'}>Current Player: {currentPlayer && currentPlayer.name}</h2>
-                        </div>
-                        <div className={'board'}>
-                            {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
-                        </div>
-                    </div>
+                <div className={'board'}>
+                    {matrix && matrix.map((row, i) => <Row key={i} row={row} playMove={this.playMove} />)}
                 </div>
             </div>
         );
