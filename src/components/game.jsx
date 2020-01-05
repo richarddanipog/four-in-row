@@ -42,23 +42,22 @@ class Game extends Component {
         this.playMove = this.playMove.bind(this);
     };
 
-    
+
     moveBack = () => {
-        if (this.state.currentPlayer.name == "player1" && numOfPlayers == 2 ){
+        if (this.state.currentPlayer.name == "player1" && numOfPlayers == 2) {
             board.moveBack(this.state.lastMoveOfPlayer2);
             const m = board.getMatrix();
             this.setState({
                 matrix: m
             })
             this.toggleCurrentPlayer()
-        } else if (this.state.currentPlayer.name == "player2" && numOfPlayers == 2){
+        } else if (this.state.currentPlayer.name == "player2" && numOfPlayers == 2) {
             board.moveBack(this.state.lastMoveOfPlayer1);
             const m = board.getMatrix();
             this.setState({
                 matrix: m
             })
-            this.toggleCurrentPlayer()
-        } else if (this.state.currentPlayer.name == "player1" && numOfPlayers == 1){
+        } else if (this.state.currentPlayer.name == "player1" && numOfPlayers == 1) {
             board.moveBack(this.state.lastMoveOfPlayer2);
             board.moveBack(this.state.lastMoveOfPlayer1);
             const m = board.getMatrix();
@@ -66,7 +65,7 @@ class Game extends Component {
                 matrix: m
             })
         }
-        
+
     }
 
     componentDidMount() {
@@ -118,24 +117,24 @@ class Game extends Component {
     playMove(colIndex = -1) {
         if (!this.state.roundOver && !this.state.gameOver) {
             const { currentPlayer } = this.state;
-            if (currentPlayer.name == "player1"){
+            if (currentPlayer.name == "player1") {
                 this.setState({
                     lastMoveOfPlayer1: colIndex
                 })
             }
-            if (currentPlayer.name == "player2"){
+            if (currentPlayer.name == "player2") {
                 this.setState({
                     lastMoveOfPlayer2: colIndex
                 })
             }
             if (colIndex === -1) {
-                colIndex = currentPlayer.move(); 
-                
-                    this.setState({
-                        lastMoveOfPlayer2: colIndex
-                    })
-                }
-            
+                colIndex = currentPlayer.move();
+
+                this.setState({
+                    lastMoveOfPlayer2: colIndex
+                })
+            }
+
             let didMove = board.move(colIndex, currentPlayer.value);
             console.log(didMove)
             if (board.doWeHaveAWinner(this.state.matrix, rowInput, colInput)) {
@@ -191,8 +190,8 @@ class Game extends Component {
                     <hr />
                     <div className={'current-player'}>Current Player : {currentPlayer && currentPlayer.name}</div>
                     <div className={'move-back'}>
-                    <button onClick={() => this.moveBack()}>move back</button>
-                </div>
+                        <a href="#" className={"btn btn-white btn-animateds"} onClick={() => this.moveBack()}>Undo</a>
+                    </div>
                     {draw && <h1 className={'winner'}>DRAW!</h1>}
                 </div>
                 <div className={'board'}>

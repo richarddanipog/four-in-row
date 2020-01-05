@@ -177,8 +177,55 @@ a:hover{
     margin: 10px auto;
   }
 }
-.move-back button{
-  border: none;
-  padding:20px;
-  background-color:transparent;
+
+
+.btn:link,.btn:visited{
+  transform: translateX(0);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all .2s;
+  position: relative;
+}
+.btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+.btn:active{
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+
+}
+.btn-white{
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after{
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: all 0.4s
+}
+
+.btn-white::after{
+  background-color:#fff;
+}
+
+.btn:hover::after{
+  transform:scaleX(1.4) scaleY(1.4);
+  opacity: 0;
+}
+
+.btn-animated{
+  animation:moveInBottom .5s ease-out .75s;
+  animation-fill-mode: backwards;
 }
